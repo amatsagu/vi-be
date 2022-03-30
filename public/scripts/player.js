@@ -6,6 +6,7 @@ class Player {
     static #tracks = [];
     static #lastPlayedIds = [];
     static #loopLimit = 5; // How many songs should Player remember back to not repeat them. Take 20% of total playlist length.
+    static #switch = document.getElementById("switch-btn");
     static #speaker = (() => {
         const audio = new Audio;
         audio.crossOrigin = "anonymous";
@@ -16,6 +17,7 @@ class Player {
 
     static async _init() {
         await Player.setPlaylist(Player.#playlistUrl);
+        Player.#switch.onclick = Player.play;
     }
 
     static async setPlaylist(url, silent) {
@@ -29,7 +31,7 @@ class Player {
             if (!silent) console.log("[Player] [Error] Failed to fetch. Provided playlist url is considered as invalid.");
         }
 
-        // Check
+        // Make primitive, quick check
         let idx = 0;
         for (const { id, title, author, duration } of res) {
             if (typeof id != "string" || typeof title != "string" || (author && typeof author != "string") || typeof duration != "number") {
@@ -48,10 +50,16 @@ class Player {
 
     static play() {
         if (Player.#isPlaying) return console.log("[Player] [Warn] Stream is already playing!");
+        Player.#switch.style.fill = "rgb(64, 180, 128)";
+        Player.#switch.onclick = Player.pause;
+        Player.#isPlaying = true;
     }
 
     static pause() {
         if (!Player.#isPlaying) return console.log("[Player] [Warn] Stream is already paused!");
+        Player.#switch.style.fill = "#e2e2e2";
+        Player.#switch.onclick = Player.play;
+        Player.#isPlaying = false;
     }
 }
 
