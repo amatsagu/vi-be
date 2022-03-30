@@ -1,20 +1,20 @@
-@media (max-width: 400px) {
+@media (max-width: 440px) {
     body {
         font-size: 1rem;
-    }
-}
-
-@media (max-width: 300px) {
-    body {
-        font-size: 0.9rem;
     }
 
     .btn {
         width: 2rem;
     }
 
-    #track-author {
-        top: 52%;;
+    #switch-btn {
+        top: 60%;
+    }
+}
+
+@media (max-width: 560px) {
+    .btn {
+        width: 2rem;
     }
 
     #switch-btn {
