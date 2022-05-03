@@ -2,11 +2,11 @@ class Player {
     static #isPlaying = false;
     static #linkedVisualizer = false;
     static #volume = parseFloat(localStorage.getItem("volume") ?? "0.5");
-    static #playlistUrl = localStorage.getItem("playlistUrl") ?? "https://raw.githubusercontent.com/Amatsagu/Vi-be/master/playlist";
+    static #playlistUrl = localStorage.getItem("playlistUrl") ?? "https://raw.githubusercontent.com/Amatsagu/Vi-be/master/public/playlist/details.json";
     static #playback = localStorage.getItem("playback") && JSON.parse(localStorage.getItem("playback"));
     static #tracks = [];
     static #lastPlayedIds = [];
-    static #loopLimit = 5; // How many songs should Player remember back to not repeat them. Take 20% of total playlist length.
+    static #loopLimit = 10; // How many songs should Player remember back to not repeat them. Take 20% of total playlist length.
     static #switch = document.getElementById("switch-btn");
     static #speaker = (() => {
         const audio = new Audio();
@@ -42,6 +42,8 @@ class Player {
             Player.#playback = { trackId: track.id, endTimestamp: now + track.duration };
             Player.#lastPlayedIds.push(track.id);
             localStorage.setItem("playback", JSON.stringify(Player.#playback));
+
+            while (Player.#lastPlayedIds.length > Player.#loopLimit) Player.#lastPlayedIds.shift();
             return { ...track, offset: 0 };
         }
     }
@@ -55,33 +57,6 @@ class Player {
         titleNode.innerText = title;
         authorNode.innerText = (author && author.substr(0, 32)) ?? "";
         document.title = `${title} - Vi~be`;
-    }
-
-    static async setPlaylist(url, silent) {
-        if (!silent) console.log(`[Player] [Info] Verifying ${url} as a new playlist source. Fetching "details.json" file from ${url}/details.json uri.`);
-
-        let res;
-        try {
-            res = await (await fetch(`${url}/details.json`)).json();
-        } catch {
-            if (!silent) console.log("[Player] [Error] Failed to fetch. Provided playlist url is considered as invalid.");
-        }
-
-        // Make primitive, quick check
-        let idx = 0;
-        for (const { id, title, author, duration } of res) {
-            if (typeof id != "string" || typeof title != "string" || (author && typeof author != "string") || typeof duration != "number") {
-                if (!silent) console.log(`[Player] [Error] Failed to fetch. Track[${idx}] doesn't meet schema.`);
-                return;
-            }
-            idx++;
-        }
-
-        localStorage.setItem("playlistUrl", url);
-        Player.#playlistUrl = url;
-        Player.#tracks = res;
-        Player.#loopLimit = Math.round(res.length * 0.2);
-        if (!silent) console.log(`[Player] [Info] Provided playlist url \"details.json\" file got accepted (tracks = ${Player.#tracks.length}, loopLimit = ${Player.#loopLimit}). Keep in mind it only checks data file, it won't check every single audio source.`);
     }
 
     static async play() {
@@ -119,5 +94,10 @@ class Player {
         Player.#switch.onclick = Player.play;
         Player.#isPlaying = false;
         Player.#speaker.pause();
+    }
+
+    static setVolume(value) {
+        if (typeof value != "number" || value > 100 || value < 0) return console.log("[Player] [Warn] Provided value is invalid! Please use a number from 1 to 100 (%).");
+        Player.#speaker.volume = value / 100;
     }
 }
