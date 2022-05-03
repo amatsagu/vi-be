@@ -2,11 +2,11 @@ class Player {
     static #isPlaying = false;
     static #linkedVisualizer = false;
     static #volume = parseFloat(localStorage.getItem("volume") ?? "0.5");
-    static #playlistUrl = localStorage.getItem("playlistUrl") ?? "https://raw.githubusercontent.com/Amatsagu/Vi-be/master/public/playlist/details.json";
+    static #playlistUrl = "https://raw.githubusercontent.com/Amatsagu/Vi-be/master/public/playlist";
     static #playback = localStorage.getItem("playback") && JSON.parse(localStorage.getItem("playback"));
     static #tracks = [];
     static #lastPlayedIds = [];
-    static #loopLimit = 10; // How many songs should Player remember back to not repeat them. Take 20% of total playlist length.
+    static #loopLimit = 5;
     static #switch = document.getElementById("switch-btn");
     static #speaker = (() => {
         const audio = new Audio();
@@ -16,7 +16,9 @@ class Player {
     })();
 
     static async _init() {
-        await Player.setPlaylist(Player.#playlistUrl, true);
+        const res = await (await fetch(`${Player.#playlistUrl}/details.json`)).json();
+        Player.#tracks = res;
+        Player.#loopLimit = Math.round(res.length * 0.15);
         Player.#switch.onclick = Player.play;
         Visualizer._init();
     }
@@ -98,6 +100,8 @@ class Player {
 
     static setVolume(value) {
         if (typeof value != "number" || value > 100 || value < 0) return console.log("[Player] [Warn] Provided value is invalid! Please use a number from 1 to 100 (%).");
-        Player.#speaker.volume = value / 100;
+        Player.#speaker.volume = Math.floor(value) / 100;
+        localStorage.setItem("volume", Player.#speaker.volume);
+        console.log(`[Player] [Info] Successfully set volume to ${Math.floor(value)}%`);
     }
 }
