@@ -1,0 +1,23 @@
+body {
+	margin: 0;
+	padding: 0;
+	color: var(--text-color);
+	font-family: "Rubik", sans-serif;
+	font-weight: 400;
+	font-size: 1.4rem;
+	background-color: var(--bg-color);
+	background-image: url("background.png");
+	background-size: 1100px;
+}
+
+#app {
+	width: 100vw;
+	height: 100vh;
+}
+
+.center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
