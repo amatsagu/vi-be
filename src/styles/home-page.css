@@ -1,0 +1,90 @@
+#home-container {
+	display: flex;
+	flex-direction: column;
+	min-width: 36rem;
+	width: 60vw;
+	min-height: 20rem;
+	height: 90vh;
+	background: rgba(0, 0, 0, 0.2);
+	box-shadow: 0 4px 16px 0 rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(2px);
+	-webkit-backdrop-filter: blur(2px);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#logo-container {
+	display: flex;
+	width: 100%;
+	height: 15%;
+	justify-content: center;
+	margin-top: 3%;
+	margin-bottom: 2%;
+}
+
+#creator-container {
+	text-align: center;
+	line-height: 0.25rem;
+}
+
+#creator-container p:last-of-type {
+	color: var(--theme-color);
+}
+
+#creator-input {
+	font-size: 1rem;
+	transition: box-shadow 0.1s ease-in-out 0s;
+	background: transparent;
+	height: 36px;
+	width: 55%;
+	outline: 0;
+	margin: 0;
+	padding: 8px 7px 8px 14px;
+	resize: none;
+	border: none;
+	border-radius: 4px;
+	box-shadow: inset 0 0 0 1px var(--idle-text-color);
+	color: var(--text-color);
+}
+
+#creator-input:focus {
+	box-shadow: inset 0 0 0 1px var(--text-color);
+}
+
+#creator-input::-webkit-search-cancel-button {
+	-webkit-appearance: none;
+	display: inline-block;
+	width: 0.5rem;
+	height: 0.5rem;
+	margin-left: 7px;
+	background: linear-gradient(45deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 43%, var(--idle-text-color) 45%, var(--idle-text-color) 55%, rgba(0, 0, 0, 0) 57%, rgba(0, 0, 0, 0) 100%),
+		linear-gradient(135deg, transparent 0%, transparent 43%, var(--idle-text-color) 45%, var(--idle-text-color) 55%, transparent 57%, transparent 100%);
+	cursor: pointer;
+}
+
+#creator-input:focus::-webkit-search-cancel-button {
+	background: linear-gradient(45deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 43%, var(--text-color) 45%, var(--text-color) 55%, rgba(0, 0, 0, 0) 57%, rgba(0, 0, 0, 0) 100%),
+		linear-gradient(135deg, transparent 0%, transparent 43%, var(--text-color) 45%, var(--text-color) 55%, transparent 57%, transparent 100%);
+}
+
+#creator-submit {
+	margin-top: 1%;
+	font-size: 1rem;
+	background: linear-gradient(var(--theme-gradient-color), var(--theme-color));
+	color: var(--text-color);
+	border: none;
+	border-radius: 24px;
+	height: 36px;
+	width: 35%;
+	cursor: pointer;
+}
+
+#playlist-splitter {
+	border: none;
+	height: 1px;
+	width: 75%;
+	color: rgba(255, 255, 255, 0.2);
+	background-color: rgba(255, 255, 255, 0.2);
+    margin-top: 2%;
+    margin-bottom: 2%;
+}

@@ -1,0 +1,25 @@
+import { useState } from "react";
+import '../styles/home-page.css'
+
+function HomePage() {
+	return (
+        <div id="home-container" className="center">
+            <div id="logo-container">
+                <img id="logo" className="no-touch" src="logo.svg" alt="Vi-be logo" decoding="async" draggable="false" />
+            </div>
+            <div id="creator-container">
+                <p>Enter a Spotify link to playlist you would like to listen.</p>
+                <p>Artist & podcast links aren't supported.</p>
+                <input type="search" name="creator-input" id="creator-input" placeholder="Example: https://open.spotify.com/playlist/6sDHVoBPxFCgZW2k6c1bgn?si=c0c89bb39f2945e9" />
+                <br />
+                <button id="creator-submit">Add to list</button>
+            </div>
+            <hr id="playlist-splitter" />
+            <div id="playlist-container">
+                
+            </div>
+        </div>
+    );
+}
+
+export default HomePage;

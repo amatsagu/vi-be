@@ -1,10 +1,10 @@
-import AccessPage from "./pages/access-page";
+import HomePage from "./pages/home-page";
 import "./styles/app.css";
 
 function App() {
 	return (
 		<div className="app">
-			<AccessPage />
+			<HomePage />
 		</div>
 	);
 }
