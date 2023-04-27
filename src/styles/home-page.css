@@ -5,10 +5,8 @@
 	width: 60vw;
 	min-height: 20rem;
 	height: 90vh;
-	background: rgba(0, 0, 0, 0.2);
+
 	box-shadow: 0 4px 16px 0 rgba(255, 255, 255, 0.05);
-	backdrop-filter: blur(2px);
-	-webkit-backdrop-filter: blur(2px);
 	border-radius: 10px;
 	border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -85,8 +83,8 @@
 	width: 75%;
 	color: rgba(255, 255, 255, 0.2);
 	background-color: rgba(255, 255, 255, 0.2);
-    margin-top: 2%;
-    margin-bottom: 2%;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 #creator-input.invalid {

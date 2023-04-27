@@ -3,8 +3,8 @@ function CheckSpotifyPlatlistInput(): boolean {
     if (!node) return false;
 
     const value = node.value;
-    if (value.length == 0 || value.trim().length == 0) {
-        node.classList.remove("invalid");
+    if (value.length == 0) {
+        node.classList.add("invalid");
         return false;
     }
     
