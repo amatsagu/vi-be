@@ -2,7 +2,7 @@ class Player {
     static #isPlaying = false;
     static #linkedVisualizer = false;
     static #volume = parseFloat(localStorage.getItem("volume") ?? "0.5");
-    static #playlistUrl = "https://raw.githubusercontent.com/Amatsagu/Vi-be/master/public/playlist";
+    static #playlistUrl = "https://raw.githubusercontent.com/Amatsagu/Vi-be/demo/public/playlist";
     static #playback = localStorage.getItem("playback") && JSON.parse(localStorage.getItem("playback"));
     static #tracks = [];
     static #lastPlayedIds = [];
